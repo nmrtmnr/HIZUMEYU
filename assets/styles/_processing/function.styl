@@ -1,0 +1,85 @@
+//*** percentage
+per(n, w = $dsSp)
+  percentage((n / w))
+
+//*** viewport width
+vw(n, w = $dsSp)
+  ((n / w) * 100)vw
+
+//*** viewport height
+vh(n, h)
+  ((n / h) * 100)vh
+
+//*** root em
+rem(n, w = $bfs)
+  (n / w)rem
+
+//*** px
+px(n)
+  (n)px
+
+//*** px for sp display
+spPx(n)
+  (n / 2)px
+
+//*** font setting
+font(fs, lh = null, ls = null, fw = null)
+  font-size (fs)px
+  if lh != null
+    line-height (lh / fs)
+  if ls != null
+    letter-spacing (ls / 1000) em
+  if fw != null
+    font-weight fw
+
+fontPc(fs, lh = null, ls = null, fw = null)
+  +pc()
+    font-size (fs)px
+  if lh != null
+    +pc()
+      line-height (lh / fs)
+  if ls != null
+    +pc()
+      letter-spacing (ls / 1000) em
+  if fw != null
+    +pc()
+      font-weight fw
+
+fontSp(fs, lh = null, ls = null, fw = null)
+  +lv1()
+    font-size (fs / 2)px
+  if lh != null
+    +lv1()
+      line-height (lh / fs)
+  if ls != null
+    +lv1()
+      letter-spacing (ls / 1000) em
+  if fw != null
+    +lv1()
+      font-weight fw
+
+fullWidth(device = 'pc')
+  $edge = $dePc
+  if(device == 'sp')
+    $edge = $deSp
+  margin-right rem($edge) * -1
+  margin-left  rem($edge) * -1
+
+//*** content size
+cntFrmSizePc()
+  $cntFrmOutrSize * 1px
+
+cntFrmSizeSp()
+  100%
+
+cntFrmInrLSizePc()
+  $cntFrmOutrSize - $cntFrmOutrEdge * 2 * 1px
+
+cntFrmInrLSizeSp()
+  rem($cntFrmSize)
+
+cntFrmInrSSizePc()
+  $cntFrmInrSize - $cntFrmInrEdge * 2 * 1px
+
+cntFrmInrSSizeSp()
+  rem($cntFrmSize - $cntFrmEdgeL - $cntFrmEdgeR)

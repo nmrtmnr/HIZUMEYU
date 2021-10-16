@@ -1,0 +1,78 @@
+//*** column list
+.c-col-list
+  &--pc
+    +pc()
+      display flex
+      flex-wrap wrap
+      justify-content space-between
+  &--sp
+    +sp()
+      display flex
+      flex-wrap wrap
+      justify-content space-between
+
+//*** 3col
+.c-col-list--3--pc
+  @extend .c-col-list--pc
+  .c-col-list__itm
+    +pc()
+      width rem(293)
+
+  .c-col-list__itm__link
+    +pc()
+      transition opacity .25s ease
+      &:hover
+        opacity .7
+
+  .c-col-list__itm__link__ttl
+    fontPc(15, 24, 0, 700)
+    +pc()
+      margin-top 26px
+
+  .c-col-list__itm__link__txt
+    fontPc(14, 22, -30, 400)
+    +pc()
+      margin-top 13px
+
+  .c-col-list__itm__link__date
+    color $thinGray
+    font-family $font-en
+    font-style italic
+    fontPc(17, 24, 100, 400)
+    +pc()
+      margin-top 11px
+
+.c-col-list--3--sp
+  @extend .c-col-list--sp
+
+.c-col-list--3
+  @extend .c-col-list--3--pc
+  @extend .c-col-list--3--sp
+
+//*** 1col
+.c-col-list--1--sp
+  .c-col-list__itm
+    +sp()
+      width 100%
+
+  .c-col-list__itm + .c-col-list__itm
+    +sp()
+      margin-top rem(44)
+
+  .c-col-list__itm__link__ttl
+    fontSp(30, 24, 0, 700)
+    +sp()
+      margin-top spPx(36)
+
+  .c-col-list__itm__link__txt
+    fontSp(28, 37, -30, 400)
+    +sp()
+      margin-top spPx(30)
+
+  .c-col-list__itm__link__date
+    color $thinGray
+    font-family $font-en
+    font-style italic
+    fontSp(26, 26, 100, 400)
+    +sp()
+      margin-top spPx(21)

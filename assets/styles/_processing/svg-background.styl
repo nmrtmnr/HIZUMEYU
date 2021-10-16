@@ -1,0 +1,8 @@
+returnColor($color = '')
+  if '' == $color
+    $color = $black
+  $color = replace('#', '', s('%s', $color))
+
+arrow01($color = '')
+  $color = returnColor($color)
+  url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%2015%22%20width%3D%228%22%20height%3D%2215%22%20style%3D%22enable-background%3Anew%200%200%208%2015%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20d%3D%22M7.9%201.1%202.1%207.4%208%2013.9%206.9%2015%200%207.4%206.9%200l1%201.1z%22%20style%3D%22fill%3A%23' + $color + '%22%2F%3E%3C%2Fsvg%3E%0A')
