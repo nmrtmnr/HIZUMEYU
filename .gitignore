@@ -91,3 +91,6 @@ sw.*
 
 # nodenv settings
 .node-version
+
+# contentful settings
+.contentful.json

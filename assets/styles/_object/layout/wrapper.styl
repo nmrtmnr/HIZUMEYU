@@ -1,0 +1,31 @@
+//*** wrapper
+$transitionDuration = .5s
+.l-wrpr
+  transition opacity $transitionDuration + .2 ease .2s
+  +pc()
+    min-height 100vh
+  +sp()
+    min-height 100vh
+  &.off
+    opacity 0
+    transition opacity $transitionDuration ease
+
+//*** front page
+body.p-front-page .l-wrpr
+  background-color $purple
+
+//*** news
+body.p-news .l-wrpr
+  background-color $purple
+
+//*** news detail
+body.p-news-detail .l-wrpr
+  background-color $purple
+
+//*** sauna bath
+body.p-sauna-bath .l-wrpr
+  background-color $blue
+
+//*** privacy-policy
+body.p-privacy-policy .l-wrpr
+  background-color $purple

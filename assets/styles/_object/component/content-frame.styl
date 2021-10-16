@@ -1,0 +1,50 @@
+//*** content frame
+//+++ common
+.c-cnt-frm
+[class*='c-cnt-frm--inr--']
+  +pc()
+    margin-right auto
+    margin-left auto
+
+//+++ outer
+.c-cnt-frm
+  +pc()
+    width cntFrmSizePc()
+  +sp()
+    width cntFrmSizeSp()
+  &--pc
+    +pc()
+      width cntFrmSizePc()
+  &--sp
+    +sp()
+      width cntFrmSizeSp()
+
+//+++ inner L size
+.c-cnt-frm--inr--l
+  +pc()
+    width cntFrmInrLSizePc()
+  +sp()
+    width cntFrmInrLSizeSp()
+    margin-left rem($windowEdgeL)
+  &--pc
+    +pc()
+      width cntFrmInrLSizePc()
+  &--sp
+    +sp()
+      width cntFrmInrLSizeSp()
+      margin-left rem($windowEdgeL)
+
+//+++ inner S size
+.c-cnt-frm--inr--s
+  +pc()
+    width cntFrmInrSSizePc()
+  +sp()
+    width cntFrmInrSSizeSp()
+    margin-left rem($windowEdgeL + $cntFrmEdgeL)
+  &--pc
+    +pc()
+      width cntFrmInrSSizePc()
+  &--sp
+    +sp()
+      width cntFrmInrSSizeSp()
+      margin-left rem($windowEdgeL + $cntFrmEdgeL)

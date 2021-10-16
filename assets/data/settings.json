@@ -1,0 +1,48 @@
+{
+  "rootURL": "http://localhost:3000",
+  "breakpoint": {
+    "lv1": 768
+  },
+  "design": {
+    "pc": {
+      "size": 1440,
+      "edge": 80,
+      "content": {
+        "frame": {
+          "outer": {
+            "size": 1280,
+            "edge": 100
+          },
+          "inner": {
+            "size": 1080,
+            "edge": 80
+          }
+        }
+      }
+    },
+    "sp": {
+      "size": 750,
+      "edge": 35,
+      "content": {
+        "frame": {
+          "size": 680,
+          "edge": {
+            "left": 80,
+            "right": 50
+          }
+        }
+      }
+    }
+  },
+  "path": {
+    "static": "/static",
+    "image": "/images"
+  },
+  "font": {
+    "baseSize": 10,
+    "family": {
+      "ja": "'TazuganeGothicStdN-Book', sans-serif",
+      "en": "'HelveticaNowText-Regular', 'TazuganeGothicStdN-Book', sans-serif",
+    }
+  }
+}
