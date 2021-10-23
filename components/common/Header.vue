@@ -1,6 +1,7 @@
 <template lang="pug">
   transition
     header.b-hdr
+      | テスト
       h1.b-hdr__logo
         component(
           :is="isExternal(logo.path) ? 'a' : 'NuxtLink'"

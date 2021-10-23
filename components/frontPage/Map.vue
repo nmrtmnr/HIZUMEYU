@@ -6,7 +6,7 @@
       .map__cnt(v-inview)
         .map__cnt__gmap
           .
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2197.961345676824!2d141.16713756327533!3d39.55428919110006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8585fbe401467f%3A0xfea77e0c3eda1331!2z44CSMDI4LTMzMDUg5bKp5omL55yM57Sr5rOi6YOh57Sr5rOi55S65pel6Kmw6KW_6KOP77yS77yT4oiS77yR!5e0!3m2!1sja!2sjp!4v1632233590556!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2197.961345676824!2d141.16713756327533!3d39.55428919110006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f30!3m3!1m2!1s0x5f8585fbe401467f%3A0xfea77e0c3eda1331!2z44CSMDI4LTMzMDUg5bKp5omL55yM57Sr5rOi6YOh57Sr5rOi55S65pel6Kmw6KW_6KOP77yS77yT4oiS77yR!5e0!3m2!1sja!2sjp!4v1632233590556!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         .map__cnt__address
           .map__cnt__address__ttl(v-html="address.ttl")
           .map__cnt__address__txt.u-d-none--sp(v-html="address.txt.pc")

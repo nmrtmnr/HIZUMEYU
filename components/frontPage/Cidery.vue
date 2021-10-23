@@ -67,6 +67,7 @@ export default {
         top 54px
         left 50%
         margin-left -546px
+        padding-top 20px
       +sp()
         top rem(46)
         left rem($windowEdgeL)

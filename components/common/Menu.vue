@@ -15,10 +15,13 @@ transition
           :class="'b-menu__cnt__list__itm--' + Object.keys(list)[0]"
         )
           NuxtLink.b-menu__cnt__list__itm__link(
-            :to="'/' + Object.keys(list)[0] + '/'"
+            :to="list[Object.keys(list)[0]].path"
             @click.native="onFlg = false"
           )
-            img.b-menu__cnt__list__itm__link__img(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'")
+            img.b-menu__cnt__list__itm__link__img(
+              :src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'"
+              :alt="list[Object.keys(list)[0]].ja + ' ' + list[Object.keys(list)[0]].en"
+            )
       .b-menu__cnt__overlay(v-on:click="onFlg = false")
 </template>
 
@@ -30,19 +33,43 @@ export default {
       {
         'news': {
           ja: 'ニュース',
-          en: 'NEWS'
+          en: 'NEWS',
+          path: '/news/',
+        }
+      },
+      {
+        'about': {
+          ja: 'ひづめゆについて',
+          en: 'ABOUT',
+          path: '/#about',
         }
       },
       {
         'sauna-bath': {
           ja: 'サウナ｜温浴',
-          en: 'SAUNA｜BATH'
+          en: 'SAUNA｜BATH',
+          path: '/sauna-bath/',
+        }
+      },
+      {
+        'cidery': {
+          ja: 'サイダリー',
+          en: 'CIDERY',
+          path: '/#cidery',
+        }
+      },
+      {
+        'map': {
+          ja: 'マップ',
+          en: 'MAP',
+          path: '/#map',
         }
       },
       {
         'contact': {
           ja: 'お問い合わせ',
-          en: 'CONTACT'
+          en: 'CONTACT',
+          path: '/contact/',
         }
       }
     ]
