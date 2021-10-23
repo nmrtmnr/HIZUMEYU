@@ -3,8 +3,6 @@
     h2.mv__ttl
       img.mv__ttl__img(src=`/images/common/logo-white-01.svg` :alt="ttl")
     h3.mv__stmt(v-html="stmt")
-    .mv__copy
-      img.mv__copy__img(src=`/images/front-page/mv-copy-txt-01.svg` :alt="copy")
     .mv__scroll(v-html="scroll")
     .mv__menu
       ul.mv__menu__list
@@ -24,9 +22,14 @@
       .mv__slider__list
         CommonSwiper(:opts="swiperOpts")
           .mv__slider__list__itm.swiper-slide(
-            v-for="n of 4"
-            :style="'background-image: url(/images/front-page/mv-slider-img-' + [zeroPadding(n, 2)] + '-pc.jpg)'"
+            v-for="n of 5"
           )
+            .mv__slider__list__itm__copy(v-if="n%2")
+              img.mv__slider__list__itm__copy__img(src=`/images/front-page/mv-copy-txt-01.svg` :alt="copy")
+            .mv__slider__list__itm__moon(v-else)
+              img.mv__slider__list__itm__moon__img(src=`/images/front-page/mv-moon-img-01.png` alt=``)
+            img.mv__slider__list__itm__img.u-d-none--sp(:src="'/images/front-page/mv-slider-img-' + [zeroPadding(n,2)] + '-pc.jpg'")
+            img.mv__slider__list__itm__img.u-d-none--pc(:src="'/images/front-page/mv-slider-img-' + [zeroPadding(n,2)] + '-sp.jpg'")
 </template>
 
 <script>
@@ -89,6 +92,7 @@ export default {
         disableOnInteraction: true,
       },
       speed: 2000,
+      simulateTouch: false,
     }
   }),
   mounted() {
@@ -146,25 +150,9 @@ export default {
     fontPc(19, 18, 100, 400)
     transform translate(-50%, -50%)
     +pc()
-      margin-top -90px
       vWriting()
     +sp()
       display none
-
-  .mv__copy
-    position absolute
-    left 50%
-    z-index 1
-    +pc()
-      bottom 120px
-      width 94px
-      height 102px
-      margin-left -47px
-    +sp()
-      bottom spPx(138)
-      width spPx(120)
-      height spPx(124)
-      margin-left spPx(-60)
 
   .mv__scroll
     position absolute
@@ -302,4 +290,40 @@ export default {
     background-repeat no-repeat
     background-position center
     background-size cover
+
+  .mv__slider__list__itm__copy
+  .mv__slider__list__itm__moon
+    position absolute
+    left 50%
+    z-index 1
+
+  .mv__slider__list__itm__copy
+    +pc()
+      bottom 120px
+      width 94px
+      height 102px
+      margin-left -47px
+    +sp()
+      bottom spPx(138)
+      width spPx(120)
+      height spPx(124)
+      margin-left spPx(-60)
+
+  .mv__slider__list__itm__moon
+    +pc()
+      bottom 122px
+      width 200px
+      height 20px
+      margin-left -100px
+    +sp()
+      bottom spPx(136)
+      width spPx(284)
+      height spPx(34)
+      margin-left spPx(-142)
+
+  .mv__slider__list__itm__img
+    display block
+    width 100%
+    height 100%
+    object-fit cover
 </style>

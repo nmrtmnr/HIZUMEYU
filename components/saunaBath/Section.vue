@@ -38,7 +38,7 @@ export default {
 
     & + [class*='sec--']
       +pc()
-        margin-top 63px
+        margin-top 105px
       +sp()
         margin-top spPx(103)
 
@@ -54,8 +54,8 @@ export default {
         flex-wrap wrap
         flex-direction column
         justify-content center
-        padding-top 51px
-        padding-bottom 95px
+        padding-top 65px
+        padding-bottom 125px
         vWriting()
       +sp()
         padding-top spPx(63)
@@ -66,7 +66,7 @@ export default {
       fontSp(34, 48, 100, 400)
 
     .sec__stmt__txt
-      fontPc(16, 38, 75, 400)
+      fontPc(17, 36, 75, 400)
       fontSp(24, 38, 80, 400)
 
     .sec__stmt__ttl + .sec__stmt__txt
@@ -94,7 +94,7 @@ export default {
 
     .sec__images__itm__cap
       display block
-      fontPc(13, 48, 100, 400)
+      fontPc(14, 48, 100, 400)
       fontSp(21, 30, 100, 400)
       +pc()
         margin-top 6px

@@ -19,10 +19,12 @@ export default {
     'swiper': {}
   }),
   mounted() {
-    this.swiper = new Swiper(this.$refs.mySwiper, this.opts)
+    if(!Object.keys(this.swiper).length) {
+      this.swiper = new Swiper(this.$refs.mySwiper, this.opts)
+    }
   },
   destroyed() {
-    this.swiper.destory()
+    // this.swiper.destory()
   }
 }
 </script>
