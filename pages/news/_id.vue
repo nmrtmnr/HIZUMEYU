@@ -39,7 +39,7 @@
 <script>
   import Meta from '~/mixins/meta'
 
-  import ctfConfig from '~/.contentful.json'
+  // import ctfConfig from '~/.contentful.json'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
 
@@ -107,7 +107,7 @@
     async asyncData({params}) {
       const post = await cdaClient
         .getEntries({
-          content_type: ctfConfig.CTF_NEWS_TYPE_ID,
+          content_type: process.env.CTF_NEWS_TYPE_ID,
           'fields.slug[in]': params.id,
         })
         // .then(entry => {
@@ -121,7 +121,7 @@
 
       const posts = await cdaClient
         .getEntries({
-          content_type: ctfConfig.CTF_NEWS_TYPE_ID,
+          content_type: process.env.CTF_NEWS_TYPE_ID,
           order: '-fields.date',
           limit: 3
         })

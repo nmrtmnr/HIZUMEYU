@@ -1,14 +1,23 @@
-import ctfConfig from './.contentful.json'
+// import ctfConfig from './.contentful.json'
 import { createClient } from './plugins/contentful'
 const cdaClient = createClient()
 
 export default {
   target: 'static',
 
+  env: {
+    siteName: process.env.SITE_NAME,
+    bpLv1: process.env.BREAKPOINT_LV1,
+    CTF_SPACE_ID: process.env.CTF_SPACE_ID,
+    CTF_CDA_ACCESS_TOKEN: process.env.CTF_CDA_ACCESS_TOKEN,
+    CTF_NEWS_TYPE_ID: process.env.CTF_NEWS_TYPE_ID,
+    CTF_STORY_TYPE_ID: process.env.CTF_STORY_TYPE_ID,
+  },
+
   generate: {
     routes() {
       return cdaClient
-      .getEntries(ctfConfig.CTF_NEWS_TYPE_ID)
+      .getEntries(process.env.CTF_NEWS_TYPE_ID)
       .then(posts => {
         return [...posts.items.map(post => {
           return {
@@ -18,14 +27,6 @@ export default {
         })]
       })
     }
-  },
-
-  env: {
-    siteName: process.env.SITE_NAME,
-    bpLv1: process.env.BREAKPOINT_LV1,
-    CTF_SPACE_ID: ctfConfig.CTF_SPACE_ID,
-    CTF_CDA_ACCESS_TOKEN: ctfConfig.CTF_CDA_ACCESS_TOKEN,
-    CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID,
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
