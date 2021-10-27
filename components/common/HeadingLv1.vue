@@ -68,4 +68,12 @@
     +sp()
       width spPx(78)
       height spPx(843)
+
+  .contact__ttl__pic
+    +pc()
+      width 85px
+      height 285px
+    +sp()
+      width spPx(81)
+      height spPx(531)
 </style>

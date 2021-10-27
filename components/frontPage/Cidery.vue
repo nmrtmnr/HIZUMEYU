@@ -85,11 +85,11 @@ export default {
         width 557px
         height 178px
       +sp()
-        top rem(518)
+        bottom rem(50)
         right 0
         left 0
         width cntFrmInrSSizeSp()
-        height rem(268)
+        height rem(286)
         margin-right auto
         margin-left auto
 
@@ -124,7 +124,7 @@ export default {
 
     .cidery__stmt__wrting
       fontPc(14, 22, 50, 400)
-      fontSp(22, 29, 50, 400)
+      fontSp(24, 31, 50, 400)
       +pc()
         padding-left 37px
       +sp()

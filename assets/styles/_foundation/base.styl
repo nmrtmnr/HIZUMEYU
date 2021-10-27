@@ -48,6 +48,34 @@ body
     border none
     background-color transparent
 
-// *:not(img):not(svg):not(movie)::selection
-//   background rgba($black, .99)
-//   color $white
+  // *:not(img):not(svg):not(movie)::selection
+  //   background rgba($black, .99)
+  //   color $white
+
+  input
+  button
+  select
+  textarea
+    appearance none
+    font-family inherit
+    border none
+    border-radius 0
+    outline none
+    background transparent
+
+  textarea
+    resize vertical
+
+  input[type='checkbox']
+  input[type='radio']
+    display none
+
+  input[type='submit']
+  input[type='button']
+  label
+  button
+  select
+    cursor pointer
+
+  select::-ms-expand
+    display none

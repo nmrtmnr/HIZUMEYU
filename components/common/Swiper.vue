@@ -19,9 +19,11 @@ export default {
     'swiper': {}
   }),
   mounted() {
-    if(!Object.keys(this.swiper).length) {
-      this.swiper = new Swiper(this.$refs.mySwiper, this.opts)
-    }
+    window.addEventListener('END_LOADING', () => {
+      if(!Object.keys(this.swiper).length) {
+        this.swiper = new Swiper(this.$refs.mySwiper, this.opts)
+      }
+    })
   },
   destroyed() {
     // this.swiper.destory()

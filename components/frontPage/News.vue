@@ -4,17 +4,17 @@
       h2.news__ttl(v-inview)
         CommonHeadingLv1(:data="{'id': 'news', 'alt': ttl}")
       ul.news__list.c-col-list--3--pc.c-col-list--1--sp
-        li.news__list__itm.c-col-list__itm(v-for="(list, index) in news" v-inview)
+        li.news__list__itm.c-col-list__itm(v-for="(news, index) in news" v-inview)
           component(
-            :is="isExternal(list.path) ? 'a' : 'NuxtLink'"
-            :href="isExternal(list.path) ? list.path : undefined"
-            :to="isExternal(list.path) ? undefined : list.path"
-            :target="isExternal(list.path) ? '_blank' : undefined"
+            :is="isExternal(`/news/${news.fields.slug}/`) ? 'a' : 'NuxtLink'"
+            :href="isExternal(`/news/${news.fields.slug}/`) ? `/news/'${news.fields.slug}/` : undefined"
+            :to="isExternal(`/news/${news.fields.slug}/`) ? undefined : `/news/${news.fields.slug}/`"
+            :target="isExternal(`/news/${news.fields.slug}/`) ? '_blank' : undefined"
             :class="'news__list__itm__link c-col-list__itm__link'"
           )
-            img.news__list__itm__img.c-col-list__itm__link__img(:src="'/images/front-page/news-list-img-' + [zeroPadding(index + 1, 2)] + '.jpg'")
-            h4.news__list__itm__ttl.c-col-list__itm__link__ttl(v-html="list.ttl")
-            .news__list__itm__txt.c-col-list__itm__link__txt(v-html="list.txt")
+            img.news__list__itm__img.c-col-list__itm__link__img(:src="news.fields.mainvisual.fields.file.url")
+            h4.news__list__itm__ttl.c-col-list__itm__link__ttl(v-html="news.fields.title")
+            .news__list__itm__txt.c-col-list__itm__link__txt(v-html="dateFormat(news.fields.date)")
       .news__to-list(v-inview)
         component(
           :is="isExternal(toList.path) ? 'a' : 'NuxtLink'"
@@ -27,38 +27,48 @@
 </template>
 
 <script>
-export default {
-  mixins:[],
-  components: {},
-  data: () => ({
-    ttl: 'NEWS ニュース',
-    news: [
-      {
-        ttl: 'オフィシャルサイトをオープンしました',
-        txt: 'ひづめゆのオフィシャルサイトが公開されました。こちらでは、ひづめゆの施設案内やお知らせを行っていきます。',
-        path: '/news-detail/'
+  import { createClient } from '~/plugins/contentful'
+  const cdaClient = createClient()
+
+  export default {
+    mixins:[],
+    components: {},
+    data: () => ({
+      ttl: 'NEWS ニュース',
+      toList: {
+        txt: 'すべての記事を見る',
+        path: '/news/'
       },
-      {
-        ttl: '開業予定について',
-        txt: 'ひづめゆの開業を2022年4月を目指してきましたが、諸事情により、2022年6月に変更となりました。',
-        path: '/news-detail/'
+      news: {}
+    }),
+    created() {},
+    mounted() {
+      this.asyncData()
+    },
+    watch: {},
+    methods: {
+      dateFormat: (date) => {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        let ymd = date.split('-')
+
+        ymd[1] = months[Number(ymd[1])]
+
+        return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
-      {
-        ttl: 'Instagram を立ち上げました',
-        txt: 'ひづめゆのオフィシャルインスタグラムを立ち上げました。SNSでは、最新のニュースだけでなく背景も発信していきます。',
-        path: '/news-detail/'
+      async asyncData() {
+        return await cdaClient
+        .getEntries({
+          content_type: process.env.CTF_NEWS_TYPE_ID,
+          order: '-fields.date',
+          limit: 3,
+        })
+        .then(entries => {
+          this.news = entries.items
+        })
+        .catch(console.error)
       },
-    ],
-    toList: {
-      txt: 'すべての記事を見る',
-      path: '/news/'
-    }
-  }),
-  created() {},
-  mounted() {},
-  watch: {},
-  methods: {}
-}
+    },
+  }
 </script>
 
 <style lang="stylus" scoped>
