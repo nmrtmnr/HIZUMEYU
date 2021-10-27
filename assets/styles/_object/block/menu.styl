@@ -1,0 +1,15 @@
+//*** menu
+// .b-menu
+
+//*** front page
+.p-front-page
+  .b-menu
+    +pc()
+      opacity 0
+      pointer-events none
+      transition opacity .8s ease
+
+.p-front-page.mvIsGone
+  .b-menu
+    opacity 1
+    pointer-events auto

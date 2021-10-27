@@ -10,6 +10,8 @@
     "deploy": "firebase deploy"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.5.1",
+    "@contentful/rich-text-types": "^15.5.1",
     "@nuxtjs/date-fns": "^1.5.0",
     "@nuxtjs/style-resources": "^1.2.1",
     "contentful": "^9.1.3",

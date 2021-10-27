@@ -9,59 +9,69 @@
       .c-cnt-frm--inr--s
         h3.about__story__ttl(v-html="story.ttl" v-inview)
         ul.about__story__list.c-col-list--3--pc.c-col-list--1--sp
-          li.about__story__list__itm.c-col-list__itm(v-for="(list, index) in story.list" v-inview)
+          li.about__story__list__itm.c-col-list__itm(v-for="(story, index) in stories" v-inview)
             component(
-              :is="isExternal(list.path) ? 'a' : 'NuxtLink'"
-              :href="isExternal(list.path) ? list.path : undefined"
-              :to="isExternal(list.path) ? undefined : list.path"
-              :target="isExternal(list.path) ? '_blank' : undefined"
+              :is="isExternal(story.fields.link) ? 'a' : 'NuxtLink'"
+              :href="isExternal(story.fields.link) ? story.fields.link : undefined"
+              :to="isExternal(story.fields.link) ? undefined : story.fields.link"
+              :target="isExternal(story.fields.link) ? '_blank' : undefined"
               :class="'about__story__list__itm__link c-col-list__itm__link'"
             )
-              img.about__story__list__itm__link__img.c-col-list__itm__link__img(:src="'/images/front-page/about-story-img-' + [zeroPadding(index + 1, 2)] + '.jpg'")
-              h4.about__story__list__itm__link__ttl.c-col-list__itm__link__ttl(v-html="list.ttl")
-              .about__story__list__itm__link__txt.c-col-list__itm__link__txt(v-html="list.txt")
+              img.about__story__list__itm__link__img.c-col-list__itm__link__img(:src="story.fields.thumbnail.fields.file.url")
+              h4.about__story__list__itm__link__ttl.c-col-list__itm__link__ttl(v-html="story.fields.title")
+              .about__story__list__itm__link__txt.c-col-list__itm__link__txt(v-html="dateFormat(story.fields.date)")
 </template>
 
 <script>
-export default {
-  mixins:[],
-  components: {},
-  data: () => ({
-    ttl: 'ABOUT ひづめゆについて',
-    stmt: {
-      ttl: '街をかまし、<br>紫波をわかす。',
-      txt: [
-      '岩手県紫波町の旧庁舎が、<br>地域をつなぐ新しい温浴施設<br>に生まれ変わります。',
-      '温浴・サウナをはじめ、<br>ハードサイダー醸造所、<br>コンビニエンスストア、<br>レストランなど',
-      '地域の方、全国の方、<br>お年寄りから若者までの<br>憩いの場を<br>目指していきます。'
-      ]
+  import { createClient } from '~/plugins/contentful'
+  const cdaClient = createClient()
+
+  export default {
+    mixins:[],
+    components: {},
+    data: () => ({
+      ttl: 'ABOUT ひづめゆについて',
+      stmt: {
+        ttl: '街をかまし、<br>紫波をわかす。',
+        txt: [
+        '岩手県紫波町の旧庁舎が、<br>地域をつなぐ新しい温浴施設<br>に生まれ変わります。',
+        '温浴・サウナをはじめ、<br>ハードサイダー醸造所、<br>コンビニエンスストア、<br>レストランなど',
+        '地域の方、全国の方、<br>お年寄りから若者までの<br>憩いの場を<br>目指していきます。'
+        ]
+      },
+      story: {
+        ttl: 'Our Story',
+      },
+      stories: {}
+    }),
+    created() {},
+    mounted() {
+      this.asyncData()
     },
-    story: {
-      ttl: 'Our Story',
-      list: [
-      {
-        'ttl': 'Story 01 - なぜ、ひづめゆなのか',
-        'txt': '初めまして。ひづめゆ取締役兼支配人の小川翔大です。私は今、岩手県紫波町という町で温浴サウナ施設「ひづめゆ」を開発。',
-        'path': '#'
+    watch: {},
+    methods: {
+      dateFormat: (date) => {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        let ymd = date.split('-')
+
+        ymd[1] = months[Number(ymd[1])]
+
+        return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
-      {
-        'ttl': 'Story 02 - なぜ、サウナ・温浴なのか',
-        'txt': '初めまして。ひづめゆ取締役兼支配人の小川翔大です。私は今、岩手県紫波町という町で温浴サウナ施設「ひづめゆ」を開発。',
-        'path': '#'
+      async asyncData() {
+        return await cdaClient
+        .getEntries({
+          content_type: process.env.CTF_STORY_TYPE_ID,
+          order: '-fields.date',
+          limit: 3,
+        })
+        .then(entries => {
+          this.stories = entries.items
+        })
+        .catch(console.error)
       },
-      {
-        'ttl': 'Story 03 - 紫波日詰商店街について',
-        'txt': '初めまして。ひづめゆ取締役兼支配人の小川翔大です。私は今、岩手県紫波町という町で温浴サウナ施設「ひづめゆ」を開発。',
-        'path': '#'
-      },
-      ]
     }
-  }),
-  created() {},
-  mounted() {},
-  watch: {},
-  methods: {}
-}
+  }
 </script>
 
 <style lang="stylus" scoped>

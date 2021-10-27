@@ -4,12 +4,10 @@
     +pc()
       display flex
       flex-wrap wrap
-      justify-content space-between
   &--sp
     +sp()
       display flex
       flex-wrap wrap
-      justify-content space-between
 
 //*** 3col
 .c-col-list--3--pc
@@ -17,6 +15,10 @@
   .c-col-list__itm
     +pc()
       width rem(293)
+
+  .c-col-list__itm:not(:nth-child(3n+1))
+    +pc()
+      margin-left rem(20)
 
   .c-col-list__itm__link
     +pc()
@@ -65,7 +67,7 @@
       margin-top spPx(36)
 
   .c-col-list__itm__link__txt
-    fontSp(28, 37, -30, 400)
+    fontSp(28, 44, 0, 400)
     +sp()
       margin-top spPx(30)
 

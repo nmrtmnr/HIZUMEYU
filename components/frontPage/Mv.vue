@@ -148,11 +148,9 @@ export default {
     justify-content center
     align-items center
     fontPc(19, 18, 100, 400)
+    fontSp(28, 18, 100, 400)
+    vWriting()
     transform translate(-50%, -50%)
-    +pc()
-      vWriting()
-    +sp()
-      display none
 
   .mv__scroll
     position absolute

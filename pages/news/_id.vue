@@ -5,11 +5,10 @@
         h2.news-detail__ttl(v-inview)
           CommonHeadingLv1(:data="{'id': 'news', 'alt': ttl}")
         .news-detail__cnt
-          img.news-detail__cnt__img(:src="post.items[0].fields.mainvisual.fields.file.url" alt=`` v-inview)
-          h3.news-detail__cnt__ttl(v-html="post.items[0].fields.title" v-inview)
-          span.news-detail__cnt__date(v-html="dateFormat(post.items[0].fields.date)" v-inview)
-          .news-detail__cnt__desc(v-inview)
-            p.news-detail__cnt__desc__txt(v-for="content in post.items[0].fields.description.content" v-html="content.content[0].value")
+          img.news-detail__cnt__img(:src="post[0].fields.mainvisual.fields.file.url" alt=`` v-inview)
+          h3.news-detail__cnt__ttl(v-html="post[0].fields.title" v-inview)
+          span.news-detail__cnt__date(v-html="dateFormat(post[0].fields.date)" v-inview)
+          .news-detail__cnt__desc(v-inview v-html="toHtmlString(post[0].fields.description)")
           .news-detail__cnt__others
             h3.news-detail__cnt__others__ttl(v-html="others.ttl" v-inview)
             ul.news-detail__cnt__others__list.c-col-list--3--pc.c-col-list--1--sp
@@ -42,6 +41,9 @@
   // import ctfConfig from '~/.contentful.json'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
+
+  import { BLOCKS } from '@contentful/rich-text-types';
+  import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
   const ID = 'news-detail'
   export default {
@@ -99,10 +101,18 @@
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
+     toHtmlString(obj) {
+       const options = {
+         renderNode: {
+            [BLOCKS.EMBEDDED_ASSET]: ({data: {target:{fields}}}) =>
+               `<img src="${fields.file.url}"/>`,
+          },
+       }
+       return documentToHtmlString(obj, options);
+     }
     },
     mounted() {
-      // console.log('thisthisthisthisthisthis', this);
-      // console.log($router);
+      console.log(this.post[0].fields.description.content[0].content[0].value);
     },
     async asyncData({params}) {
       const post = await cdaClient
@@ -110,14 +120,6 @@
           content_type: process.env.CTF_NEWS_TYPE_ID,
           'fields.slug[in]': params.id,
         })
-        // .then(entry => {
-        //   // console.log('testtestesetests')
-        //   // console.log(entry.items[0].fields)
-        //   return {
-        //     post: entry,
-        //   }
-        // })
-        // .catch(console.error)
 
       const posts = await cdaClient
         .getEntries({
@@ -127,7 +129,7 @@
         })
 
       return {
-        post: post,
+        post: post.items,
         posts: posts.items
       }
     },
@@ -169,8 +171,8 @@
         width cntFrmInrSSizeSp()
 
     .news-detail__cnt__ttl
-      fontPc(24, 24, 0, 700)
-      fontSp(32, 32, 0, 700)
+      fontPc(24, 37, 0, 700)
+      fontSp(34, 52, 0, 700)
       +pc()
         margin-top 48px
       +sp()
@@ -182,27 +184,40 @@
       font-family $font-en
       font-style italic
       fontPc(19, 24, 100, 400)
-      fontSp(24, 24, 100, 400)
+      fontSp(26, 26, 100, 400)
       +pc()
         margin-top 15px
       +sp()
         margin-top spPx(14)
 
     .news-detail__cnt__desc
+      fontPc(15, 22, 0, 400)
+      fontSp(28, 44, 0, 400)
       +pc()
         margin-top 38px
       +sp()
-        margin-top spPx(49)
+        margin-top spPx(30)
 
-    .news-detail__cnt__desc__txt
-      fontPc(15, 22, -30, 400)
-      fontSp(26, 40, -30, 400)
+    .news-detail__cnt__desc ::v-deep
+      img + p
+        +pc()
+          margin-top 9px
+        +sp()
+          margin-top spPx(20)
 
-    .news-detail__cnt__desc__txt + .news-detail__cnt__desc__txt
-      +pc()
-        margin-top 9px
-      +sp()
-        margin-top spPx(20)
+    .news-detail__cnt__desc ::v-deep
+      p + img
+        +pc()
+          margin-top 20px
+        +sp()
+          margin-top spPx(30)
+
+    .news-detail__cnt__desc ::v-deep
+      p + p
+        +pc()
+          margin-top 20px
+        +sp()
+          margin-top spPx(30)
 
     .news-detail__cnt__others
       +pc()

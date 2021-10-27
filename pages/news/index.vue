@@ -5,16 +5,16 @@
         h2.news__ttl(v-inview)
           CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
         .news__cnt
-          ul.news__cnt__cats(v-inview)
-            li.news__cnt__cats__itm(v-for="(list, index) in cats")
-              component(
-                :is="isExternal(list.path) ? 'a' : 'NuxtLink'"
-                :href="isExternal(list.path) ? list.path : undefined"
-                :to="isExternal(list.path) ? undefined : list.path"
-                :target="isExternal(list.path) ? '_blank' : undefined"
-                :class="'news__cnt__cats__itm__link'"
-                v-html="list.txt"
-              )
+          //- ul.news__cnt__cats(v-inview)
+          //-   li.news__cnt__cats__itm(v-for="(list, index) in cats")
+          //-     component(
+          //-       :is="isExternal(list.path) ? 'a' : 'NuxtLink'"
+          //-       :href="isExternal(list.path) ? list.path : undefined"
+          //-       :to="isExternal(list.path) ? undefined : list.path"
+          //-       :target="isExternal(list.path) ? '_blank' : undefined"
+          //-       :class="'news__cnt__cats__itm__link'"
+          //-       v-html="list.txt"
+          //-     )
 
           ul.news__cnt__list.c-col-list--3--pc.c-col-list--1--sp
             li.news__cnt__list__itm.c-col-list__itm(v-for="(post, index) in posts" v-inview)
@@ -161,7 +161,7 @@
       +sp()
         padding spPx(8)
 
-    .news__cnt__list
+    .news__cnt__cats + .news__cnt__list
       +pc()
         margin-top 34px
       +sp()

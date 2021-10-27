@@ -6,6 +6,7 @@
     .sec__stmt.c-cnt-frm--inr--s(v-inview)
       h3.sec__stmt__ttl(v-html="data.stmt.ttl")
       p.sec__stmt__txt(v-for="txt in data.stmt.txt" v-html="txt")
+      p.sec__stmt__note(v-for="note in data.stmt.note" v-html="note")
     .sec__images.c-cnt-frm--inr--s
       .sec__images__itm(v-for="(image, index) in data.images" v-inview)
         img.sec__images__itm__img(
@@ -63,11 +64,15 @@ export default {
 
     .sec__stmt__ttl
       fontPc(28, 48, 100, 400)
-      fontSp(34, 48, 100, 400)
+      fontSp(38, 54, 100, 400)
 
     .sec__stmt__txt
-      fontPc(17, 36, 75, 400)
-      fontSp(24, 38, 80, 400)
+      fontPc(17, 40, 100, 400)
+      fontSp(28, 54, 80, 400)
+
+    .sec__stmt__note
+      fontPc(15, 36, 100, 400)
+      fontSp(21, 46, 80, 400)
 
     .sec__stmt__ttl + .sec__stmt__txt
       +pc()
@@ -76,10 +81,11 @@ export default {
         margin-top spPx(54)
 
     .sec__stmt__txt + .sec__stmt__txt
+    .sec__stmt__txt + .sec__stmt__note
       +pc()
-        margin-right 38px
+        margin-right 47px
       +sp()
-        margin-top spPx(40)
+        margin-top spPx(48)
 
     .sec__images__itm
       +pc()
