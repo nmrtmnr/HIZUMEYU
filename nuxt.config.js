@@ -39,7 +39,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'robots', name: 'robots', content: 'noindex,nofollow' },
+      // { hid: 'robots', name: 'robots', content: 'noindex,nofollow' },
       { hid: 'description', name: 'description', content: process.env.SITE_DESCRIPTION},
 
       { hid: 'og:site_name', property: 'og:site_name', content: process.env.SITE_NAME },
@@ -47,7 +47,7 @@ export default {
       { hid: 'og:url', property: 'og:url', content: process.env.SITE_URL },
       { hid: 'og:title', property: 'og:title', content: process.env.SITE_NAME },
       { hid: 'og:description', property: 'og:description', content: process.env.SITE_DESCRIPTION },
-      { hid: 'og:image', property: 'og:image', content: process.env.SITE_URL + '/image/meta/ogp.jpg' },
+      { hid: 'og:image', property: 'og:image', content: process.env.SITE_URL + '/images/meta/ogp.jpg' },
 
       { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
     ],
