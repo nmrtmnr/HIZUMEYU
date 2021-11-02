@@ -1,45 +1,45 @@
 <template lang="pug">
   div(:class="'p-' + id + '--inr'")
-    section.contact.c-cnt-frm--inr--l
-      h2.contact__ttl(v-inview)
-        CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
-      .contact__cnt
-        .contact__cnt__intro
-          .contact__cnt__intro__txt(v-for="txt in txts" v-html="txt")
-        form(class="contact__cnt__forms")
-          div(
-            v-for="(form, key) in forms"
-            :class="`contact__cnt__forms__itm--${key}`"
-          )
-            .contact__cnt__forms__itm__txt(v-html="form.txt")
-            .contact__cnt__forms__itm__input(v-if="'name' === key")
-              input(
-                v-model="contactForm.name.contents"
-                type=`text`
-                id=`name`
-                name=`name`
-                required
-              )
-            .contact__cnt__forms__itm__input(v-if="'mail_address' === key")
-              input(
-                v-model="contactForm.email.contents"
-                type=`email`
-                id=`email`
-                name=`email`
-                required
-              )
-            .contact__cnt__forms__itm__input(v-if="'body' === key")
-              textarea(
-                v-model="contactForm.contents.contents"
-                id=`body`
-                name=`body`
-                rows=`8`
-              )
-          button(
-            type=`button`
-            class=`contact__cnt__forms__submit`
-            @click="sendMail()"
-          ) 送信する
+    //- section.contact.c-cnt-frm--inr--l
+    //-   h2.contact__ttl(v-inview)
+    //-     CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
+    //-   .contact__cnt
+    //-     .contact__cnt__intro
+    //-       .contact__cnt__intro__txt(v-for="txt in txts" v-html="txt")
+    //-     form(class="contact__cnt__forms")
+    //-       div(
+    //-         v-for="(form, key) in forms"
+    //-         :class="`contact__cnt__forms__itm--${key}`"
+    //-       )
+    //-         .contact__cnt__forms__itm__txt(v-html="form.txt")
+    //-         .contact__cnt__forms__itm__input(v-if="'name' === key")
+    //-           input(
+    //-             v-model="contactForm.name.contents"
+    //-             type=`text`
+    //-             id=`name`
+    //-             name=`name`
+    //-             required
+    //-           )
+    //-         .contact__cnt__forms__itm__input(v-if="'mail_address' === key")
+    //-           input(
+    //-             v-model="contactForm.email.contents"
+    //-             type=`email`
+    //-             id=`email`
+    //-             name=`email`
+    //-             required
+    //-           )
+    //-         .contact__cnt__forms__itm__input(v-if="'body' === key")
+    //-           textarea(
+    //-             v-model="contactForm.contents.contents"
+    //-             id=`body`
+    //-             name=`body`
+    //-             rows=`8`
+    //-           )
+    //-       button(
+    //-         type=`button`
+    //-         class=`contact__cnt__forms__submit`
+    //-         @click="sendMail()"
+    //-       ) 送信する
         //- div(
         //-   v-model="snackBar.show"
         //-   :color="snackBar.color"
@@ -119,21 +119,21 @@
       // }
     }),
     methods: {
-      sendMail() {
-         const form = this.contactForm
-         const sendMail = httpsCallable('sendMail')
+      // sendMail() {
+      //    const form = this.contactForm
+      //    const sendMail = httpsCallable('sendMail')
 
-         console.log(sendMail);
+      //    console.log(sendMail);
 
-         sendMail({ form })
-          .then((response) => {
-            console.log(response);
-            // alert(response)
-          })
-          .catch((error) => {
-            console.log(error);
-            // alert(error)
-          })
+      //    sendMail({ form })
+      //     .then((response) => {
+      //       console.log(response);
+      //       // alert(response)
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //       // alert(error)
+      //     })
 
         // if (this.$refs.form.validate()) {
           // this.contactForm.loading = true
@@ -158,7 +158,7 @@
           //     this.contactForm.loading = false
           //   })
         // }
-      },
+      // },
       // showSnackBar: function (color, message) {
       //   this.snackBar.message = message
       //   this.snackBar.color = color
