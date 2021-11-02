@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
+  // import Meta from '~/mixins/meta'
 
   const ID = 'front-page'
   export default {
@@ -19,7 +19,7 @@
         class: 'p-' + ID,
       }
     },
-    mixins: [Meta],
+    // mixins: [Meta],
     data: () => ({
       id : ID,
       wH: 0,

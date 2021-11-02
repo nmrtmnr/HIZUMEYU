@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
+  // import Meta from '~/mixins/meta'
 
   // import ctfConfig from '~/.contentful.json'
   import { createClient } from '~/plugins/contentful'
@@ -39,22 +39,35 @@
 
   const ID = 'news'
   export default {
-    head: {
+　　　head: {
       bodyAttrs: {
         class: 'p-' + ID
-      }
+      },
+      title: `ニュース一覧／ひづめゆ｜地域をつなぐ温浴施設`,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: `岩手県紫波町の旧庁舎が、地域をつなぐ新しい温浴施設に生まれ変わります。`},
+        { hid: 'og:site_name', property: 'og:site_name', content: `ひづめゆ｜地域をつなぐ温浴施設` },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:url', property: 'og:url', content: `https://hizumeyu.jp/${ID}/` },
+        { hid: 'og:title', property: 'og:title', content: `ニュース一覧／ひづめゆ｜地域をつなぐ温浴施設` },
+        { hid: 'og:description', property: 'og:description', content: `温浴・サウナをはじめ、リンゴのシードル醸造所、コンビニエンスストア、レストランなど、地域の方、全国の方、お年寄りから若者までの憩いの場を目指してまいります。` },
+        { hid: 'og:image', property: 'og:image', content: `https://hizumeyu.jp/image/meta/ogp.jpg` },
+        { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
+      ],
     },
-    mixins: [Meta],
+    // mixins: [Meta],
     data: () => ({
       id : ID,
-      meta: {
-        title: 'news archive' + '｜' + process.env.SITE_NAME,
-        keywords: 'hoge',
-        description: 'hoge',
-        type: 'article',
-        url: 'https://hogehoge.com/news',
-        image: 'https://hogehoge.com/img/ogp/news.png'
-      },
+      // meta: {
+      //   title: 'news archive' + '｜' + process.env.SITE_NAME,
+      //   keywords: 'hoge',
+      //   description: 'hoge',
+      //   type: 'article',
+      //   url: 'https://hogehoge.com/news',
+      //   image: 'https://hogehoge.com/img/ogp/news.png'
+      // },
       ttl: 'NEWS ニュース',
       cats: [
         {

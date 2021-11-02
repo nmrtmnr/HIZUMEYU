@@ -3,15 +3,21 @@
     footer.b-ftr
       .b-ftr--inr.c-cnt-frm--pc.c-cnt-frm--inr--l--sp
         ul#contact.b-ftr__menu
-          li.b-ftr__menu__itm(v-for="val in menu")
-            component(
-              :is="isExternal(val.path) ? 'a' : 'NuxtLink'"
-              :href="isExternal(val.path) ? val.path : undefined"
-              :to="isExternal(val.path) ? undefined : val.path"
-              :target="isExternal(val.path) ? '_blank' : undefined"
-              :class="'b-ftr__menu__itm__link'"
-              v-html="val.txt"
-            )
+          //- li.b-ftr__menu__itm(v-for="val in menu")
+          //-   component(
+          //-     :is="isExternal(val.path) ? 'a' : 'NuxtLink'"
+          //-     :href="isExternal(val.path) ? val.path : undefined"
+          //-     :to="isExternal(val.path) ? undefined : val.path"
+          //-     :target="isExternal(val.path) ? '_blank' : undefined"
+          //-     :class="'b-ftr__menu__itm__link'"
+          //-     v-html="val.txt"
+          //-   )
+          li.b-ftr__menu__itm
+            a(href=`mailto:hizumeyu@gmail.com` class=`b-ftr__menu__itm__link`)
+              | お問い合わせ
+          li.b-ftr__menu__itm
+            NuxtLink(to="/privacy-policy/" class="b-ftr__menu__itm__link")
+              | プライバシーポリシー
         .b-ftr__info
           .b-ftr__info__itm(v-for="val, key in info")
             .b-ftr__info__itm__hdg(v-html="key")
