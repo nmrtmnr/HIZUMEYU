@@ -1,9 +1,9 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     .news
       .news--inr.c-cnt-frm--inr--l
         h2.news__ttl(v-inview)
-          CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
+          CommonHeadingLv1(:data="{'id': this.HEAD.ID, 'alt': ttl}")
         .news__cnt
           //- ul.news__cnt__cats(v-inview)
           //-   li.news__cnt__cats__itm(v-for="(list, index) in cats")
@@ -15,7 +15,6 @@
           //-       :class="'news__cnt__cats__itm__link'"
           //-       v-html="list.txt"
           //-     )
-
           ul.news__cnt__list.c-col-list--3--pc.c-col-list--1--sp
             li.news__cnt__list__itm.c-col-list__itm(v-for="(post, index) in posts" v-inview)
               component(
@@ -31,43 +30,13 @@
 </template>
 
 <script>
-  // import Meta from '~/mixins/meta'
-
-  // import ctfConfig from '~/.contentful.json'
+  import Head from '~/mixins/head'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
 
-  const ID = 'news'
   export default {
-　　　head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      },
-      title: `ニュース一覧／ひづめゆ｜地域をつなぐ温浴施設`,
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: `岩手県紫波町の旧庁舎が、地域をつなぐ新しい温浴施設に生まれ変わります。`},
-        { hid: 'og:site_name', property: 'og:site_name', content: `ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:type', property: 'og:type', content: 'article' },
-        { hid: 'og:url', property: 'og:url', content: `https://hizumeyu.jp/${ID}/` },
-        { hid: 'og:title', property: 'og:title', content: `ニュース一覧／ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:description', property: 'og:description', content: `温浴・サウナをはじめ、リンゴのシードル醸造所、コンビニエンスストア、レストランなど、地域の方、全国の方、お年寄りから若者までの憩いの場を目指してまいります。` },
-        { hid: 'og:image', property: 'og:image', content: `https://hizumeyu.jp/image/meta/ogp.jpg` },
-        { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
-      ],
-    },
-    // mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      // meta: {
-      //   title: 'news archive' + '｜' + process.env.SITE_NAME,
-      //   keywords: 'hoge',
-      //   description: 'hoge',
-      //   type: 'article',
-      //   url: 'https://hogehoge.com/news',
-      //   image: 'https://hogehoge.com/img/ogp/news.png'
-      // },
       ttl: 'NEWS ニュース',
       cats: [
         {
@@ -89,33 +58,32 @@
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
     },
     mounted() {
-      // console.log('thisthisthisthisthisthis', this);
     },
-    asyncData({}) {
-      return cdaClient
+    asyncData({ $CTF_MODEL }) {
+      const HEAD = {
+        ID: 'news',
+        TITLE: 'ニュース一覧／ひづめゆ'
+      }
+
+      const posts = cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           order: '-fields.date',
         })
-        .then(entries => {
-          return {
-            posts: entries.items,
-          }
-        })
-        .catch(console.error)
-      // return cdaClient
-      //   .getTags()
-      //   .then(entries => {
-      //     console.log('tagかも:::::::', entries.items)
-      //   })
-      //   .catch(console.error)
-    },
+
+      return Promise.all([HEAD, posts]).then(([HEAD, posts]) => {
+        return {
+          HEAD,
+          posts: posts.items
+        }
+      })
+    }
   }
 </script>
 
@@ -180,4 +148,3 @@
       +sp()
         margin-top rem(50)
 </style>
-

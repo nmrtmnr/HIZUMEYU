@@ -1,8 +1,8 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     section.privacy-policy.c-cnt-frm--inr--l
       h2.privacy-policy__ttl(v-inview)
-        CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
+        CommonHeadingLv1(:data="{'id': this.HEAD.ID, 'alt': ttl}")
       .privacy-policy__cnt
         .privacy-policy__cnt__intro(v-for="txt in intro" v-inview)
           p.privacy-policy__cnt__intro__txt(v-html="txt")
@@ -11,39 +11,11 @@
 </template>
 
 <script>
-  // import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  const ID = 'privacy-policy'
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      },
-      title: `プライバシーポリシー／ひづめゆ｜地域をつなぐ温浴施設`,
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: `岩手県紫波町の旧庁舎が、地域をつなぐ新しい温浴施設に生まれ変わります。`},
-        { hid: 'og:site_name', property: 'og:site_name', content: `ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:type', property: 'og:type', content: 'article' },
-        { hid: 'og:url', property: 'og:url', content: `https://hizumeyu.jp/${ID}/` },
-        { hid: 'og:title', property: 'og:title', content: `プライバシーポリシー／ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:description', property: 'og:description', content: `温浴・サウナをはじめ、リンゴのシードル醸造所、コンビニエンスストア、レストランなど、地域の方、全国の方、お年寄りから若者までの憩いの場を目指してまいります。` },
-        { hid: 'og:image', property: 'og:image', content: `https://hizumeyu.jp/image/meta/ogp.jpg` },
-        { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
-      ],
-    },
-    // mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      // meta: {
-      //   title: 'privacy-policy' + '｜' + process.env.SITE_NAME,
-      //   keywords: 'hoge',
-      //   description: 'hoge',
-      //   type: 'article',
-      //   url: 'https://hogehoge.com/news',
-      //   image: 'https://hogehoge.com/img/ogp/news.png'
-      // },
       intro: [
         '株式会社ひづめゆは、皆様の個人情報の重要性を認識し、その適正な収集、利用、保護をはかるとともに、安全管理を行うため、プライバシーポリシーを定め、次のとおり運用します。'
       ],
@@ -130,7 +102,18 @@
           ]
         },
       ]
-    })
+    }),
+    asyncData() {
+      const ID = 'privacy-policy'
+      const TITLE = 'プライバシーポリシー'
+
+      return {
+        HEAD: {
+          ID,
+          TITLE
+        }
+      }
+    }
   }
 </script>
 

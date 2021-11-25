@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     .news-detail
       .news-detail--inr.c-cnt-frm--inr--l
         h2.news-detail__ttl(v-inview)
@@ -35,46 +35,17 @@
 </template>
 
 <script>
-  // import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  // import ctfConfig from '~/.contentful.json'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
 
   import { BLOCKS } from '@contentful/rich-text-types';
   import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
-  const ID = 'news-detail'
   export default {
-　　　head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      },
-      // title: `${this.post.items[0].fields.title}／ひづめゆ｜地域をつなぐ温浴施設`,
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: `岩手県紫波町の旧庁舎が、地域をつなぐ新しい温浴施設に生まれ変わります。`},
-        { hid: 'og:site_name', property: 'og:site_name', content: `ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:type', property: 'og:type', content: 'article' },
-        { hid: 'og:url', property: 'og:url', content: `https://hizumeyu.jp/${ID}/` },
-        // { hid: 'og:title', property: 'og:title', content: `${this.post.items[0].fields.title}／ひづめゆ｜地域をつなぐ温浴施設` },
-        { hid: 'og:description', property: 'og:description', content: `温浴・サウナをはじめ、リンゴのシードル醸造所、コンビニエンスストア、レストランなど、地域の方、全国の方、お年寄りから若者までの憩いの場を目指してまいります。` },
-        { hid: 'og:image', property: 'og:image', content: `https://hizumeyu.jp/image/meta/ogp.jpg` },
-        { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
-      ],
-    },
-    // mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      // meta: {
-      //   title: 'news detail' + '｜' + process.env.SITE_NAME,
-      //   keywords: 'hoge',
-      //   description: 'hoge',
-      //   type: 'article',
-      //   url: 'https://hogehoge.com/news',
-      //   image: 'https://hogehoge.com/img/ogp/news.png'
-      // },
       ttl: 'NEWS ニュース',
       others: {
         ttl: 'Other News',
@@ -109,7 +80,7 @@
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
@@ -124,26 +95,34 @@
      }
     },
     mounted() {
-      console.log(this.post[0].fields.description.content[0].content[0].value);
+      // console.log(this.post[0].fields.description.content[0].content[0].value);
     },
-    async asyncData({params}) {
+    async asyncData({params, $CTF_MODEL}) {
+      const ID = 'news-detail'
+
       const post = await cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           'fields.slug[in]': params.id,
         })
 
       const posts = await cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           order: '-fields.date',
           limit: 3
         })
 
-      return {
-        post: post.items,
-        posts: posts.items
-      }
+      return Promise.all([ID, post, posts]).then(([ID, post, posts]) => {
+        return {
+          HEAD: {
+            ID,
+            TITLE: post.items[0].fields.title
+          },
+          post: post.items,
+          posts: posts.items
+        }
+      })
     },
   }
 </script>
@@ -213,16 +192,16 @@
     .news-detail__cnt__desc ::v-deep
       img + p
         +pc()
-          margin-top 9px
+          margin-top 20px
         +sp()
           margin-top spPx(20)
 
     .news-detail__cnt__desc ::v-deep
       p + img
         +pc()
-          margin-top 20px
+          margin-top 40px
         +sp()
-          margin-top spPx(30)
+          margin-top spPx(40)
 
     .news-detail__cnt__desc ::v-deep
       p + p
@@ -266,4 +245,3 @@
         width spPx(50)
         height spPx(390)
 </style>
-

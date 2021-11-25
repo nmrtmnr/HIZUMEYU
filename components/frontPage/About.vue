@@ -1,10 +1,12 @@
+651 254
 <template lang="pug">
   section#about.about
     h2.about__ttl(v-inview)
       CommonHeadingLv1(:data="{'id': 'about', 'alt': ttl}")
     .about__stmt(v-inview)
-      h3.about__stmt__ttl(v-html="stmt.ttl")
-      p.about__stmt__txt(v-for="txt in stmt.txt" v-html="txt")
+      img.about__stmt__img(:src="`/images/front-page/about-stmt-01.svg`" :alt="`${ttl} ${stmt.img.alt}`")
+      //- h3.about__stmt__ttl(v-html="stmt.ttl")
+      //- p.about__stmt__txt(v-for="txt in stmt.txt" v-html="txt")
     .about__story
       .c-cnt-frm--inr--s
         h3.about__story__ttl(v-html="story.ttl" v-inview)
@@ -29,6 +31,9 @@
   export default {
     mixins:[],
     components: {},
+    props: {
+      stories: Array
+    },
     data: () => ({
       ttl: 'ABOUT ひづめゆについて',
       stmt: {
@@ -42,35 +47,21 @@
       story: {
         ttl: 'Our Story',
       },
-      stories: {}
     }),
     created() {},
-    mounted() {
-      this.asyncData()
-    },
+    mounted() {},
     watch: {},
     methods: {
       dateFormat: (date) => {
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
-      async asyncData() {
-        return await cdaClient
-        .getEntries({
-          content_type: process.env.CTF_STORY_TYPE_ID,
-          order: '-fields.date',
-          limit: 3,
-        })
-        .then(entries => {
-          this.stories = entries.items
-        })
-        .catch(console.error)
-      },
-    }
+
+    },
   }
 </script>
 
@@ -119,21 +110,29 @@
       +sp()
         padding-top rem(42)
 
-    .about__stmt__ttl
-      fontPc(31, 48, 200, 400)
-      fontSp(32, 45, 200, 400)
+    .about__stmt__img
+      display block
+      margin 0 auto
       +pc()
-        margin-left 60px
+        width 651px
+        height 254px
       +sp()
-        margin-left spPx(36)
+        width spPx(986)
+        height spPx(384)
 
-    .about__stmt__txt
-      fontPc(18, 40, 100, 400)
-      fontSp(26, 37, 100, 400)
+    // .about__stmt__ttl
+    //   fontSp(32, 45, 200, 400)
+    //   +pc()
+    //     display none
+    //   +sp()
+    //     margin-left spPx(36)
+
+    // .about__stmt__txt
+    //   fontSp(26, 37, 100, 400)
+    //   +pc()
+    //     display none
 
     .about__stmt__txt + .about__stmt__txt
-      +pc()
-        margin-right 38px
       +sp()
         margin-right spPx(30)
 

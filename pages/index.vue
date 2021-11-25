@@ -1,8 +1,8 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     FrontPageMv
-    FrontPageNews(:cdaClient=cdaClient)
-    FrontPageAbout
+    FrontPageNews(:news="this.news")
+    FrontPageAbout(:stories="this.stories")
     FrontPageSauna
     FrontPageBath
     FrontPageCidery
@@ -10,18 +10,14 @@
 </template>
 
 <script>
-  // import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  const ID = 'front-page'
+  import { createClient } from '~/plugins/contentful'
+  const cdaClient = createClient()
+
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID,
-      }
-    },
-    // mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
       wH: 0,
       mvIsGoneFlg: false,
     }),
@@ -58,6 +54,33 @@
         }
       }
     },
+    asyncData({ $CTF_MODEL }) {
+      const HEAD = {
+        ID: 'front-page'
+      }
+
+      const news = cdaClient
+        .getEntries({
+          content_type: $CTF_MODEL.NEWS,
+          order: '-fields.date',
+          limit: 3,
+        })
+
+      const stories = cdaClient
+        .getEntries({
+          content_type: $CTF_MODEL.STORIES,
+          order: '-fields.date',
+          limit: 3,
+        })
+
+      return Promise.all([HEAD, news, stories]).then(([HEAD, news, stories]) => {
+        return {
+          HEAD,
+          news: news.items,
+          stories: stories.items
+        }
+      })
+    }
   }
 </script>
 
