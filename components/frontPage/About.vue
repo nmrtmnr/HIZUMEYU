@@ -123,8 +123,7 @@
         width 651px
         height 254px
       +sp()
-        width spPx(986)
-        height spPx(384)
+        width spPx(560)
 
     // .about__stmt__ttl
     //   fontSp(32, 45, 200, 400)
