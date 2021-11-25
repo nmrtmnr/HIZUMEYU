@@ -4,7 +4,10 @@
     h2.about__ttl(v-inview)
       CommonHeadingLv1(:data="{'id': 'about', 'alt': ttl}")
     .about__stmt(v-inview)
-      img.about__stmt__img(:src="`/images/front-page/about-stmt-01.svg`" :alt="`${ttl} ${stmt.img.alt}`")
+      img.about__stmt__img(
+        :src="`/images/front-page/about-stmt-01.svg`"
+        :alt="`${stmt.ttl} ${stmt.alt}`"
+      )
       //- h3.about__stmt__ttl(v-html="stmt.ttl")
       //- p.about__stmt__txt(v-for="txt in stmt.txt" v-html="txt")
     .about__story
@@ -42,6 +45,9 @@
         '岩手県紫波町の旧庁舎が、<br>地域をつなぐ新しい温浴施設<br>に生まれ変わります。',
         '温浴・サウナをはじめ、<br>ハードサイダー醸造所、<br>コンビニエンスストア、<br>レストランなど',
         '地域の方、全国の方、<br>お年寄りから若者までの<br>憩いの場を<br>目指していきます。'
+        ],
+        alt: [
+        '岩手県紫波町の旧庁舎が、地域をつなぐ新しい温浴施設に生まれ変わります。温浴・サウナをはじめ、ハードサイダー醸造所、コンビニエンスストア、レストランなど地域の方、全国の方、お年寄りから若者までの憩いの場を目指していきます。テスト'
         ]
       },
       story: {
