@@ -12,7 +12,7 @@
     },
     computed: {
       bpLv1() {
-        return parseInt(process.env.bpLv1)
+        return parseInt(this.$BREAKPOINT_LV1)
       },
     },
   }

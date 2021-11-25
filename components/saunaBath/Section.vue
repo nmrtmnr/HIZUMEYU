@@ -4,6 +4,7 @@
       .sec__ttl__pic
         CommonHeadingLv1(:data="{'id': data.id, 'alt': data.ttl}")
     .sec__stmt.c-cnt-frm--inr--s(v-inview)
+      img.sec__stmt__img(:src="`/images/sauna-bath/${data.id}-stmt-img.svg`" :alt="data.stmt.img.alt")
       h3.sec__stmt__ttl(v-html="data.stmt.ttl")
       p.sec__stmt__txt(v-for="txt in data.stmt.txt" v-html="txt")
       p.sec__stmt__note(v-for="note in data.stmt.note" v-html="note")
@@ -62,28 +63,34 @@ export default {
         padding-top spPx(63)
         padding-bottom spPx(78)
 
+    .sec__stmt__img
+      +pc()
+        display block
+        margin 0 auto
+      +sp()
+        display none
+
     .sec__stmt__ttl
-      fontPc(28, 48, 100, 400)
       fontSp(38, 54, 100, 400)
+      +pc()
+        display none
 
     .sec__stmt__txt
-      fontPc(17, 40, 100, 400)
       fontSp(28, 54, 80, 400)
+      +pc()
+        display none
 
     .sec__stmt__note
-      fontPc(15, 36, 100, 400)
       fontSp(21, 46, 80, 400)
+      +pc()
+       display none
 
     .sec__stmt__ttl + .sec__stmt__txt
-      +pc()
-        margin-right 48px
       +sp()
         margin-top spPx(54)
 
     .sec__stmt__txt + .sec__stmt__txt
     .sec__stmt__txt + .sec__stmt__note
-      +pc()
-        margin-right 47px
       +sp()
         margin-top spPx(48)
 
@@ -122,6 +129,10 @@ export default {
       +sp()
         left rem($windowEdgeL)
 
+    .sec__stmt__img
+      +pc()
+        width 782px
+
   //*** sauna
   .sec--bath
     .sec__ttl
@@ -136,4 +147,8 @@ export default {
         margin-left (cntFrmInrSSizePc() / 2)
       +sp()
         left rem($windowEdgeL)
+
+    .sec__stmt__img
+      +pc()
+        width 766px
 </style>

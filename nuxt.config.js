@@ -26,7 +26,8 @@ export default {
           }
         })]
       })
-    }
+    },
+    crawler: false
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -35,26 +36,11 @@ export default {
       lang: 'ja',
       prefix: 'og: http://ogp.me/ns#'
     },
-    title: process.env.siteName,
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'robots', name: 'robots', content: 'noindex,nofollow' },
-      { hid: 'description', name: 'description', content: 'page description'},
-      { hid: 'keywords', name: 'keywords', content: 'page keywords' },
-
-      { hid: 'og:site_name', property: 'og:site_name', content: 'site name' },
-      { hid: 'og:type', property: 'og:type', content: 'page type' },
-      { hid: 'og:url', property: 'og:url', content: 'page url' },
-      { hid: 'og:title', property: 'og:title', content: process.env.siteName },
-      { hid: 'og:description', property: 'og:description', content: 'page description' },
-      { hid: 'og:image', property: 'og:image', content: 'http://localhost:3000//image/meta/ogp.jpg' },
-
-      { hid: 'twitter:card', name: 'twitter:cpard', content: 'summary_large_image' },
+      //NOTE: '~/plugins/constants' に記載
     ],
     link: [
-      { rel: 'shortcut icon', type: 'image/png', href: 'http://localhost:3000/images/meta/icon.png' },
-      { rel: 'apple-touch-icon', href: '/images/meta/icon.png' },
+      //NOTE: icon系は '~/plugins/constants' に記載
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap'},
@@ -70,6 +56,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/constants',
     '~/plugins/utils',
     '~/plugins/filter',
     '~/plugins/loading',
@@ -89,6 +76,15 @@ export default {
     '@aceforth/nuxt-optimized-images',
     '@nuxtjs/style-resources',
     '@nuxtjs/date-fns',
+    // '@nuxtjs/vuetify',
+    // [
+    //   '@nuxtjs/google-gtag',
+    //   {
+    //     id: process.env.GOOGLE_ANALYTICS_ID, //あなたのGoogleアナリティクスのプロパティID
+    //     debug: true //本番環境以外でもGAを有効にしたい場合はtrueに。
+    //   }
+    // ],
+    '@nuxtjs/gtm',
   ],
   optimizedImages: {
     optimizeImages: true,
@@ -124,6 +120,17 @@ export default {
       const wrpr = document.querySelector('.l-wrpr')
       wrpr.classList.remove('off')
       wrpr.removeEventListener('transitionEnd', () => done)
+    }
+  },
+
+  // GTM
+  gtm: {
+    id: process.env.GOOGLE_TAG_MANAGER_ID, // Used as fallback if no runtime config is provided
+  },
+
+  publicRuntimeConfig: {
+    gtm: {
+      id: process.env.GOOGLE_TAG_MANAGER_ID
     }
   },
 }

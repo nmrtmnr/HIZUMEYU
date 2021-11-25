@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     .news-detail
       .news-detail--inr.c-cnt-frm--inr--l
         h2.news-detail__ttl(v-inview)
@@ -22,7 +22,6 @@
                 )
                   img.news-detail__cnt__others__list__itm__link__img.c-col-list__itm__link__img(:src="post.fields.mainvisual.fields.file.url")
                   h4.news-detail__cnt__others__list__itm__link__ttl.c-col-list__itm__link__ttl(v-html="post.fields.title")
-                  .news-detail__cnt__others__list__itm__link__txt.c-col-list__itm__link__txt(v-html="post.fields.description.content[0].content[0].value")
                   .news-detail__cnt__others__list__itm__link__date.c-col-list__itm__link__date(v-html="dateFormat(post.fields.date)")
         component(
           :is="isExternal(toList.path) ? 'a' : 'NuxtLink'"
@@ -36,33 +35,17 @@
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  // import ctfConfig from '~/.contentful.json'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
 
   import { BLOCKS } from '@contentful/rich-text-types';
   import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
-  const ID = 'news-detail'
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      }
-    },
-    mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      meta: {
-        title: 'news detail' + '｜' + process.env.SITE_NAME,
-        keywords: 'hoge',
-        description: 'hoge',
-        type: 'article',
-        url: 'https://hogehoge.com/news',
-        image: 'https://hogehoge.com/img/ogp/news.png'
-      },
       ttl: 'NEWS ニュース',
       others: {
         ttl: 'Other News',
@@ -97,7 +80,7 @@
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
@@ -112,26 +95,34 @@
      }
     },
     mounted() {
-      console.log(this.post[0].fields.description.content[0].content[0].value);
+      // console.log(this.post[0].fields.description.content[0].content[0].value);
     },
-    async asyncData({params}) {
+    async asyncData({params, $CTF_MODEL}) {
+      const ID = 'news-detail'
+
       const post = await cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           'fields.slug[in]': params.id,
         })
 
       const posts = await cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           order: '-fields.date',
           limit: 3
         })
 
-      return {
-        post: post.items,
-        posts: posts.items
-      }
+      return Promise.all([ID, post, posts]).then(([ID, post, posts]) => {
+        return {
+          HEAD: {
+            ID,
+            TITLE: post.items[0].fields.title
+          },
+          post: post.items,
+          posts: posts.items
+        }
+      })
     },
   }
 </script>
@@ -201,16 +192,16 @@
     .news-detail__cnt__desc ::v-deep
       img + p
         +pc()
-          margin-top 9px
+          margin-top 20px
         +sp()
           margin-top spPx(20)
 
     .news-detail__cnt__desc ::v-deep
       p + img
         +pc()
-          margin-top 20px
+          margin-top 40px
         +sp()
-          margin-top spPx(30)
+          margin-top spPx(40)
 
     .news-detail__cnt__desc ::v-deep
       p + p
@@ -254,4 +245,3 @@
         width spPx(50)
         height spPx(390)
 </style>
-

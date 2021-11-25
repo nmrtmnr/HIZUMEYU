@@ -38,7 +38,7 @@ export default {
   components: {},
   data: () => ({
     ttl: 'ひづめゆ',
-    stmt: '二〇二二年六月　開業予定',
+    stmt: '二〇二二年夏開業',
     copy: 'ととのうしあわせになる',
     scroll: 'scroll',
     menu: [

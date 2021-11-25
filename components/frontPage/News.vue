@@ -33,39 +33,27 @@
   export default {
     mixins:[],
     components: {},
+    props: {
+      news: Array
+    },
     data: () => ({
       ttl: 'NEWS ニュース',
       toList: {
         txt: 'すべての記事を見る',
         path: '/news/'
       },
-      news: {}
     }),
     created() {},
-    mounted() {
-      this.asyncData()
-    },
+    mounted() {},
     watch: {},
     methods: {
       dateFormat: (date) => {
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
-      },
-      async asyncData() {
-        return await cdaClient
-        .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
-          order: '-fields.date',
-          limit: 3,
-        })
-        .then(entries => {
-          this.news = entries.items
-        })
-        .catch(console.error)
       },
     },
   }

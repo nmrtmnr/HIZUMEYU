@@ -1,9 +1,9 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     .news
       .news--inr.c-cnt-frm--inr--l
         h2.news__ttl(v-inview)
-          CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
+          CommonHeadingLv1(:data="{'id': this.HEAD.ID, 'alt': ttl}")
         .news__cnt
           //- ul.news__cnt__cats(v-inview)
           //-   li.news__cnt__cats__itm(v-for="(list, index) in cats")
@@ -15,7 +15,6 @@
           //-       :class="'news__cnt__cats__itm__link'"
           //-       v-html="list.txt"
           //-     )
-
           ul.news__cnt__list.c-col-list--3--pc.c-col-list--1--sp
             li.news__cnt__list__itm.c-col-list__itm(v-for="(post, index) in posts" v-inview)
               component(
@@ -31,30 +30,13 @@
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
-
-  // import ctfConfig from '~/.contentful.json'
+  import Head from '~/mixins/head'
   import { createClient } from '~/plugins/contentful'
   const cdaClient = createClient()
 
-  const ID = 'news'
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      }
-    },
-    mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      meta: {
-        title: 'news archive' + '｜' + process.env.SITE_NAME,
-        keywords: 'hoge',
-        description: 'hoge',
-        type: 'article',
-        url: 'https://hogehoge.com/news',
-        image: 'https://hogehoge.com/img/ogp/news.png'
-      },
       ttl: 'NEWS ニュース',
       cats: [
         {
@@ -76,33 +58,32 @@
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         let ymd = date.split('-')
 
-        ymd[1] = months[Number(ymd[1])]
+        ymd[1] = months[Number(ymd[1] - 1)]
 
         return `${ymd[1]} ${ymd[2]}, ${ymd[0]}`
       },
     },
     mounted() {
-      // console.log('thisthisthisthisthisthis', this);
     },
-    asyncData({}) {
-      return cdaClient
+    asyncData({ $CTF_MODEL }) {
+      const HEAD = {
+        ID: 'news',
+        TITLE: 'ニュース一覧／ひづめゆ'
+      }
+
+      const posts = cdaClient
         .getEntries({
-          content_type: process.env.CTF_NEWS_TYPE_ID,
+          content_type: $CTF_MODEL.NEWS,
           order: '-fields.date',
         })
-        .then(entries => {
-          return {
-            posts: entries.items,
-          }
-        })
-        .catch(console.error)
-      // return cdaClient
-      //   .getTags()
-      //   .then(entries => {
-      //     console.log('tagかも:::::::', entries.items)
-      //   })
-      //   .catch(console.error)
-    },
+
+      return Promise.all([HEAD, posts]).then(([HEAD, posts]) => {
+        return {
+          HEAD,
+          posts: posts.items
+        }
+      })
+    }
   }
 </script>
 
@@ -167,4 +148,3 @@
       +sp()
         margin-top rem(50)
 </style>
-

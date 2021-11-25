@@ -1,35 +1,24 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     SaunaBathSection(v-for="(data, key) in cnts" :data="data" :key="key")
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  const ID = 'sauna-bath'
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      }
-    },
-    mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      meta: {
-        title: 'sauna bath' + '｜' + process.env.SITE_NAME,
-        keywords: 'hoge',
-        description: 'hoge',
-        type: 'article',
-        url: 'https://hogehoge.com/news',
-        image: 'https://hogehoge.com/img/ogp/news.png'
-      },
       cnts: {
         sauna: {
           id: 'sauna',
           ttl: 'SAUNA サウナ',
           stmt: {
             ttl: '身体とこころを<br class="u-d-none--sp">ととのえる<br class="u-d-none--pc">サウナ施設',
+            img: {
+              src: '',
+              alt: '身体とこころをととのえるサウナ施設　ひづめゆのサウナは心身がリフレッシュし、自然と元気になれる場所。入浴法は、熱したサウナストーンに自ら水をかけて水蒸気を発生させる方式 = セルフロウリュを採用。好みの湿度を自由に調整可能にすることで最適な体感温度で無理なく発汗作用を促進させることができます。暖かみのあるデザインは岩手県産の木材をふんだんに使用。自然との繋がりを感じることでリラックス効果を高めます。時には友人と、時には家族と、時にはひとりで。新旧、多世代の様々な人々と一緒に快適な空間をつくり上げていく、身体とこころに心地よいサウナ体験をお楽しみください。',
+            },
             txt: [
               'ひづめゆのサウナは心身がリフレッシュし、<br class="u-d-none--sp">自然と元気になれる場所。',
               '入浴法は、熱したサウナストーンに自ら水をかけて<br class="u-d-none--sp">水蒸気を発生させる方式 = セルフロウリュを採用。<br class="u-d-none--sp">好みの湿度を自由に調整可能にすることで<br class="u-d-none--sp">最適な体感温度で無理なく<br class="u-d-none--sp">発汗作用を促進させることができます。',
@@ -47,6 +36,10 @@
           ttl: 'BATH 温浴',
           stmt: {
             ttl: '高濃度炭酸泉による<br>「からだ」に優しい温浴施設',
+            img: {
+              src: '',
+              alt: '高濃度炭酸泉による「からだ」に優しい温浴施設　ひづめゆのお風呂は、日々の疲れを癒すだけではなく健康も向上させる場所。炭酸泉は、ヨーロッパで「心臓の湯」と呼ばれており、心臓疾患の療養泉として古来より親しまれてきました。ひづめゆでは、医療機関で使用されているものと同等の高濃度炭酸泉生成装置を使用します。高濃度炭酸泉に入浴することで、血流改善による高血圧・心疾患・肩こりの改善や予防効果、また保湿成分の増加による皮膚疾患の改善や美肌効果が高まります。※炭酸泉の効果を得るには入浴頻度が重要です。可能な限り毎日入浴を行うことが理想です。',
+            },
             txt: [
               'ひづめゆのお風呂は、<br class="u-d-none--sp">日々の疲れを癒すだけではなく健康も向上させる場所。',
 
@@ -60,7 +53,18 @@
           },
         }
       }
-    })
+    }),
+    asyncData() {
+      const ID = 'sauna-bath'
+      const TITLE = 'サウナ｜温浴'
+
+      return {
+        HEAD: {
+          ID,
+          TITLE
+        }
+      }
+    }
   }
 </script>
 

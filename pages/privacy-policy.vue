@@ -1,8 +1,8 @@
 <template lang="pug">
-  div(:class="'p-' + id + '--inr'")
+  div(:class="'p-' + this.HEAD.ID + '--inr'")
     section.privacy-policy.c-cnt-frm--inr--l
       h2.privacy-policy__ttl(v-inview)
-        CommonHeadingLv1(:data="{'id': id, 'alt': ttl}")
+        CommonHeadingLv1(:data="{'id': this.HEAD.ID, 'alt': ttl}")
       .privacy-policy__cnt
         .privacy-policy__cnt__intro(v-for="txt in intro" v-inview)
           p.privacy-policy__cnt__intro__txt(v-html="txt")
@@ -11,26 +11,11 @@
 </template>
 
 <script>
-  import Meta from '~/mixins/meta'
+  import Head from '~/mixins/head'
 
-  const ID = 'privacy-policy'
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'p-' + ID
-      }
-    },
-    mixins: [Meta],
+    mixins: [Head],
     data: () => ({
-      id : ID,
-      meta: {
-        title: 'privacy-policy' + '｜' + process.env.SITE_NAME,
-        keywords: 'hoge',
-        description: 'hoge',
-        type: 'article',
-        url: 'https://hogehoge.com/news',
-        image: 'https://hogehoge.com/img/ogp/news.png'
-      },
       intro: [
         '株式会社ひづめゆは、皆様の個人情報の重要性を認識し、その適正な収集、利用、保護をはかるとともに、安全管理を行うため、プライバシーポリシーを定め、次のとおり運用します。'
       ],
@@ -68,10 +53,16 @@
             '人の生命、身体、または財産の保護のために個人データの第三者提供が必要である場合であって、本人の同意を得ることが困難である場合<br>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、本人の同意を取ることが困難である場合<br>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する場合であって、本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがある場合<br>有料サービス利用や商品注文等に伴うクレジットカード等の決済手続きに際してユーザーの銀行口座やクレジットカード等の正当性を金融機関、カード会社等に確認する場合また、ご本人から承諾を得たとき、または個人情報保護法で認められている場合を除き、個人情報を海外の第三者に提供することはありません。'
           ]
         },
+        // {
+        //   ttl: '6）個人情報に関するお問い合わせ',
+        //   desc: [
+        //     '開示、訂正、利用停止等のお申し出があった場合には、所定の方法に基づき対応致します。具体的な方法については、個別にご案内しますので、(<a href="/contact/">https://hizumeyu.jp/contact</a>)までお問い合わせください。'
+        //   ]
+        // },
         {
           ttl: '6）個人情報に関するお問い合わせ',
           desc: [
-            '開示、訂正、利用停止等のお申し出があった場合には、所定の方法に基づき対応致します。具体的な方法については、個別にご案内しますので、(<a href="/contact/">https://hizumeyu.jp/contact</a>)までお問い合わせください。'
+            '開示、訂正、利用停止等のお申し出があった場合には、所定の方法に基づき対応致します。具体的な方法については、個別にご案内しますので、(<a href="mailto:hizumeyu@gmail.com">hizumeyu@gmail.com</a>)までお問い合わせください。'
           ]
         },
         {
@@ -111,7 +102,18 @@
           ]
         },
       ]
-    })
+    }),
+    asyncData() {
+      const ID = 'privacy-policy'
+      const TITLE = 'プライバシーポリシー'
+
+      return {
+        HEAD: {
+          ID,
+          TITLE
+        }
+      }
+    }
   }
 </script>
 
