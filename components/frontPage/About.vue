@@ -4,9 +4,8 @@
     h2.about__ttl(v-inview)
       CommonHeadingLv1(:data="{'id': 'about', 'alt': ttl}")
     .about__stmt(v-inview)
-      img.about__stmt__img(
-        :src="`/images/front-page/about-stmt-01.svg`"
-        :alt="`${stmt.ttl} ${stmt.alt}`"
+      CommonPicture(
+        :data="{'class': 'about__stmt__pic','src': '/images/front-page/about-stmt-01-pc.svg', 'alt': `${stmt.ttl} ${stmt.alt}`}"
       )
       //- h3.about__stmt__ttl(v-html="stmt.ttl")
       //- p.about__stmt__txt(v-for="txt in stmt.txt" v-html="txt")
@@ -116,14 +115,14 @@
       +sp()
         padding-top rem(42)
 
-    .about__stmt__img
+    .about__stmt__pic
       display block
       margin 0 auto
       +pc()
         width 651px
         height 254px
       +sp()
-        width spPx(560)
+        width spPx(520)
 
     // .about__stmt__ttl
     //   fontSp(32, 45, 200, 400)
