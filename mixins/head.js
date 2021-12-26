@@ -6,6 +6,7 @@ export default {
     const DESCRIPTION = (this.HEAD.DESCRIPTION) || this.$SITE_DESCRIPTION
     const TYPE = ('front-page' === this.HEAD.ID) ? 'website' : 'article'
     const URL = (this.HEAD.ID) ? `${this.$SITE_URL}/${this.HEAD.ID}/` : this.$SITE_URL
+    const ROBOTS =  (this.HEAD.NO_ROBOTS) ? 'noindex,nofollow' : 'all'
 
     // console.log(`
     //   ID： ${ID}
@@ -25,7 +26,7 @@ export default {
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        // { hid: 'robots', name: 'robots', content: 'noindex,nofollow' },
+        { hid: 'robots', name: 'robots', content: ROBOTS },
 
         { hid: 'description', name: 'description', content: DESCRIPTION },
         { hid: 'og:type', propery: 'og:type', content: TYPE },
