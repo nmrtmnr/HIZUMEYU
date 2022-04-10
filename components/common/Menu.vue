@@ -65,13 +65,13 @@ export default {
           path: '/#map',
         }
       },
-      // {
-      //   'contact': {
-      //     ja: 'お問い合わせ',
-      //     en: 'CONTACT',
-      //     path: 'mailto:hizumeyu@gmail.com',
-      //   }
-      // }
+      {
+        'contact': {
+          ja: 'お問い合わせ',
+          en: 'CONTACT',
+          path: '/contact/',
+        }
+      }
     ]
   })
 }

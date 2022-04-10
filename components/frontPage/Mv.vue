@@ -11,8 +11,14 @@
           :class="'mv__menu__list__itm--' + Object.keys(list)[0]"
         )
           nuxt-link.mv__menu__list__itm__link(
+            v-if="'contact' !== Object.keys(list)[0]"
             v-scroll-to="'#' + Object.keys(list)[0]"
             to
+          )
+            img.mv__menu__list__itm__link__img--over(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-over.svg'")
+            img.mv__menu__list__itm__link__img--under(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'")
+          nuxt-link.mv__menu__list__itm__link(
+            :to="Object.keys(list)[0]"
           )
             img.mv__menu__list__itm__link__img--over(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-over.svg'")
             img.mv__menu__list__itm__link__img--under(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'")
