@@ -18,6 +18,7 @@
             img.mv__menu__list__itm__link__img--over(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-over.svg'")
             img.mv__menu__list__itm__link__img--under(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'")
           nuxt-link.mv__menu__list__itm__link(
+            v-else
             :to="Object.keys(list)[0]"
           )
             img.mv__menu__list__itm__link__img--over(:src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-over.svg'")
