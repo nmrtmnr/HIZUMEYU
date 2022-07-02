@@ -115,7 +115,7 @@ export default {
 
     .bath__gallery__itm:nth-child(1) .bath__gallery__itm__img
       +pc()
-        margin-top 12px
+        margin-top 14px
 
     .bath__gallery__itm:nth-child(2)
       +pc()

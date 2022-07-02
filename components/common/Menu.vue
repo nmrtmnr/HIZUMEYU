@@ -22,6 +22,8 @@ transition
               :src="'/images/common/txt-menu-' + Object.keys(list)[0] + '-01-under.svg'"
               :alt="list[Object.keys(list)[0]].ja + ' ' + list[Object.keys(list)[0]].en"
             )
+      .b-menu__sns
+        commonSns
       .b-menu__cnt__overlay(v-on:click="onFlg = false")
 </template>
 
@@ -35,44 +37,65 @@ export default {
           ja: 'ニュース',
           en: 'NEWS',
           path: '/news/',
-        }
+        },
       },
       {
         'about': {
           ja: 'ひづめゆについて',
           en: 'ABOUT',
           path: '/#about',
-        }
+        },
+      },
+      {
+        'guide': {
+          ja: 'ご利用案内',
+          en: 'GUIDE',
+          path: '/#guide',
+        },
       },
       {
         'sauna-bath': {
           ja: 'サウナ｜温浴',
           en: 'SAUNA｜BATH',
           path: '/sauna-bath/',
-        }
+        },
+      },
+      {
+        'whisking': {
+          ja: 'ウィスキング',
+          en: 'WHISKING',
+          path: '/#whisking',
+        },
+      },
+      {
+        'food': {
+          ja: 'お食事',
+          en: 'FOOD',
+          path: '/#food',
+        },
       },
       {
         'cidery': {
           ja: 'サイダリー',
           en: 'CIDERY',
           path: '/#cidery',
-        }
+        },
       },
       {
-        'map': {
-          ja: 'マップ',
-          en: 'MAP',
-          path: '/#map',
-        }
+        'access': {
+          ja: 'アクセス',
+          en: 'ACCESS',
+          path: '/#access',
+        },
       },
       {
         'contact': {
           ja: 'お問い合わせ',
           en: 'CONTACT',
           path: '/contact/',
-        }
-      }
-    ]
+        },
+      },
+    ],
   })
 }
 </script>
@@ -174,10 +197,11 @@ export default {
     display flex
     flex-wrap wrap
     flex-direction row-reverse
+    justify-content center
     position absolute
-    left 50%
+    left 0
     z-index 1
-    transform translateX(-50%)
+    width 100%
     +pc()
       top 266px
     +sp()
@@ -206,4 +230,14 @@ export default {
     +pc()
       width 100%
       background-color $purple
+
+  .b-menu__sns
+    position absolute
+    z-index 1
+    +pc()
+      top 35px
+      right 33px
+    +sp()
+      top spPx(44)
+      right spPx(37)
 </style>

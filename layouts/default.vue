@@ -3,7 +3,7 @@
     client-only
       commonLoading
       commonHeader
-      CommonMenu
+      commonMenu
     main.l-main(role=`main`)
       nuxt
     commonFooter

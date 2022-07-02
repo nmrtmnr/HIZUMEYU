@@ -82,7 +82,7 @@ export default {
         left 0
         z-index 1
         width spPx(49)
-        height spPX(240)
+        height spPx(240)
         background-color $white
 
     .sauna__gallery
