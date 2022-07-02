@@ -38,6 +38,7 @@ export default {
     },
     meta: [
       //NOTE: '~/plugins/constants' に記載
+      // { name: 'robots', content: 'noindex,nofollow' },
     ],
     link: [
       //NOTE: icon系は '~/plugins/constants' に記載

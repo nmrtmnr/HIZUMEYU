@@ -37,6 +37,8 @@
               img.mv__slider__list__itm__moon__img(src=`/images/front-page/mv-moon-img-01.png` alt=``)
             img.mv__slider__list__itm__img.u-d-none--sp(:src="'/images/front-page/mv-slider-img-' + [zeroPadding(n,2)] + '-pc.jpg'")
             img.mv__slider__list__itm__img.u-d-none--pc(:src="'/images/front-page/mv-slider-img-' + [zeroPadding(n,2)] + '-sp.jpg'")
+    .mv__sns
+      commonSns
 </template>
 
 <script>
@@ -45,46 +47,64 @@ export default {
   components: {},
   data: () => ({
     ttl: 'ひづめゆ',
-    stmt: '二〇二二年夏開業',
+    stmt: '二〇二二年七月七日開業',
     copy: 'ととのうしあわせになる',
     scroll: 'scroll',
     menu: [
       {
         'news': {
           ja: 'ニュース',
-          en: 'NEWS'
-        }
+          en: 'NEWS',
+        },
       },
       {
         'about': {
           ja: 'ひづめゆについて',
-          en: 'ABOUT'
-        }
+          en: 'ABOUT',
+        },
+      },
+      {
+        'guide': {
+          ja: 'ご利用案内',
+          en: 'GUIDE',
+        },
       },
       {
         'sauna-bath': {
           ja: 'サウナ｜温浴',
-          en: 'SAUNA｜BATH'
-        }
+          en: 'SAUNA｜BATH',
+        },
+      },
+      {
+        'whisking': {
+          ja: 'ウィスキング',
+          en: 'WHISKING',
+        },
+      },
+      {
+        'food': {
+          ja: 'お食事',
+          en: 'FOOD',
+        },
       },
       {
         'cidery': {
           ja: 'サイダリー',
-          en: 'CIDERY'
-        }
+          en: 'CIDERY',
+        },
       },
       {
-        'map': {
-          ja: 'マップ',
-          en: 'MAP'
-        }
+        'access': {
+          ja: 'アクセス',
+          en: 'ACCESS',
+        },
       },
       {
         'contact': {
           ja: 'お問い合わせ',
-          en: 'CONTACT'
-        }
-      }
+          en: 'CONTACT',
+        },
+      },
     ],
     slideNum: 5,
     wW: 0,
@@ -217,23 +237,35 @@ export default {
 
   .mv__menu__list__itm--news
     +pc()
-      height 183px
+      height 188px
 
   .mv__menu__list__itm--about
     +pc()
-      height 305px
+      height 313px
+
+  .mv__menu__list__itm--guide
+    +pc()
+      height 222px
 
   .mv__menu__list__itm--sauna-bath
     +pc()
       height 315px
 
+  .mv__menu__list__itm--whisking
+    +pc()
+      height 286px
+
+  .mv__menu__list__itm--food
+    +pc()
+      height 172px
+
   .mv__menu__list__itm--cidery
     +pc()
       height 235px
 
-  .mv__menu__list__itm--map
+  .mv__menu__list__itm--access
     +pc()
-      height 152px
+      height 204px
 
   .mv__menu__list__itm--contact
     +pc()
@@ -331,4 +363,14 @@ export default {
     width 100%
     height 100%
     object-fit cover
+
+  .mv__sns
+    position absolute
+    z-index 1
+    +pc()
+      top 35px
+      right 33px
+    +sp()
+      top spPx(44)
+      right spPx(37)
 </style>

@@ -3,10 +3,13 @@
     FrontPageMv
     FrontPageNews(:news="this.news")
     FrontPageAbout(:stories="this.stories")
+    FrontPageGuide
     FrontPageSauna
     FrontPageBath
+    FrontPageWhisking
+    FrontPageFood
     FrontPageCidery
-    FrontPageMap
+    FrontPageAccess
 </template>
 
 <script>

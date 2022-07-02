@@ -4,6 +4,7 @@
       h2.contact__ttl(v-inview)
         CommonHeadingLv1(:data="{'id': this.HEAD.ID, 'alt': ttl}")
       .contact__cnt
+        h3.contact__cnt__ttl(v-html="sub_ttl.mail")
         .contact__cnt__intro
           .contact__cnt__intro__txt(v-for="txt in txts" v-html="txt")
         form(class="contact__cnt__forms" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdFcQnJidzkHitms4RRogRTJ9w186xyFoXiGohodegXRRqyGg/formResponse" method="post" target="hidden_iframe")
@@ -71,6 +72,14 @@
             :class="{on: isValid}"
           ) 送信する
 
+        h3.contact__cnt__ttl(v-html="sub_ttl.tel")
+        .contact__cnt__tel
+          | 電話番号 ：&nbsp;
+          a.contact__cnt__tel__href(href=`tel:0196813151`)
+            | 019-681-3151
+        .contact__cnt__time
+          | 受付時間 ： 10:00〜22:00
+
         .contact__cnt__to-privacy-policy
           .contact__cnt__to-privacy-policy__txt(v-html="to_privacy_policy.ttl")
           component(
@@ -92,6 +101,10 @@
     mixins: [Head],
     data: () => ({
       ttl: 'CONTACT お問い合わせ',
+      sub_ttl: {
+        mail: 'メールでのお問い合わせ',
+        tel: 'お電話でのお問い合わせ',
+      },
       txts: [
         'お問い合わせは下記のメールフォームからお願いします。',
         'お問い合わせいただいた際に当方から連絡が来ない場合は、プログラムの不具合も考えられます。',
@@ -205,7 +218,7 @@
       background-color $purple
       +pc()
         margin-top -24px
-        margin-left -20px
+        margin-left -25px
       +sp()
         margin-top spPx(-24)
         margin-left spPx(-24)
@@ -217,6 +230,26 @@
       +sp()
         width cntFrmInrSSizeSp()
         margin-top spPx(-8)
+
+    .contact__cnt__ttl
+      fontPc(24, 30, 0, 400)
+      fontSp(36, 36, 50, 400)
+      +pc()
+        margin-top 5px
+      +sp()
+        margin-top spPx(2)
+
+    .contact__cnt__intro
+      +pc()
+        margin-top 33px
+      +sp()
+        margin-top spPx(40)
+
+    .contact__cnt__forms
+      +pc()
+        padding-bottom 81px
+      +sp()
+        padding-bottom spPx(146)
 
     .contact__cnt__intro__txt
     .contact__cnt__forms__itm__txt
@@ -357,6 +390,20 @@
         margin-top 65px
       +sp()
         margin-top spPx(72)
+
+    .contact__cnt__tel
+    .contact__cnt__time
+      fontPc(15, 30, 0, 400)
+      fontSp(24, 42, 50, 400)
+
+    .contact__cnt__tel
+      +pc()
+        margin-top 13px
+      +sp()
+        margin-top spPx(33)
+
+    .contact__cnt__tel__href
+      display inline
 
     .contact__cnt__to-privacy-policy__link
       text-decoration underline

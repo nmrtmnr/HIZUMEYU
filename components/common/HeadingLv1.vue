@@ -37,6 +37,14 @@
       width spPx(77)
       height spPx(321)
 
+  .guide__ttl__pic
+    +pc()
+      width 71px
+      height 246px
+    +sp()
+      width spPx(80)
+      height spPx(423)
+
   .bath__ttl__pic
     +pc()
       width 80px
@@ -44,6 +52,22 @@
     +sp()
       width spPx(81)
       height spPx(251)
+
+  .whisking__ttl__pic
+    +pc()
+      width 78px
+      height 289px
+    +sp()
+      width spPx(75)
+      height spPx(529)
+
+  .food__ttl__pic
+    +pc()
+      width 82px
+      height 159px
+    +sp()
+      width spPx(81)
+      height spPx(314)
 
   .cidery__ttl__pic
     +pc()
@@ -53,13 +77,13 @@
       width spPx(98)
       height spPx(310)
 
-  .map__ttl__pic
+  .access__ttl__pic
     +pc()
-      width 78px
-      height 151px
+      width 81px
+      height 197px
     +sp()
-      width spPx(77)
-      height spPx(274)
+      width spPx(75)
+      height spPx(384)
 
   .privacy-policy__ttl__pic
     +pc()
