@@ -14,7 +14,7 @@
           :src="'/images/sauna-bath/' + data.id + '-imgs-img-' + [zeroPadding(index + 1, 2)] + '.jpg'"
           alt=``
         )
-        span.sec__images__itm__cap(v-html="image.cap")
+        span.sec__images__itm__cap(v-if="image.cap" v-html="image.cap")
 </template>
 
 <script>
@@ -101,9 +101,12 @@ export default {
 
     .sec__images__itm + .sec__images__itm
       +pc()
-        margin-top 29px
+        margin-top 18px
       +sp()
-        margin-top spPx(56)
+        margin-top rem(18)
+
+    .sec__images__itm__img
+      display block
 
     .sec__images__itm__cap
       display block
@@ -117,10 +120,11 @@ export default {
   //*** sauna
   .sec--sauna
     .sec__ttl
-      +pc()
-        background-image url(/images/sauna-bath/sauna-ttl-img-01-pc.jpg)
-      +sp()
-        background-image url(/images/sauna-bath/sauna-ttl-img-01-sp.jpg)
+      background-image url(/images/sauna-bath/sauna-ttl-img-01.jpg)
+      // +pc()
+      //   background-image url(/images/sauna-bath/sauna-ttl-img-01-pc.jpg)
+      // +sp()
+      //   background-image url(/images/sauna-bath/sauna-ttl-img-01-sp.jpg)
 
     .sec__ttl__pic
       +pc()
@@ -135,11 +139,15 @@ export default {
 
   //*** sauna
   .sec--bath
+    +pc()
+      padding-bottom 125px
+
     .sec__ttl
-      +pc()
-        background-image url(/images/sauna-bath/bath-ttl-img-01-pc.jpg)
-      +sp()
-        background-image url(/images/sauna-bath/bath-ttl-img-01-sp.jpg)
+      background-image url(/images/sauna-bath/bath-ttl-img-01.jpg)
+      // +pc()
+      //   background-image url(/images/sauna-bath/bath-ttl-img-01-pc.jpg)
+      // +sp()
+      //   background-image url(/images/sauna-bath/bath-ttl-img-01-sp.jpg)
 
     .sec__ttl__pic
       +pc()

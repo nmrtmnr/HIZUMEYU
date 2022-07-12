@@ -52,12 +52,13 @@ export default {
     background-repeat no-repeat
     background-position center
     background-size cover
+    background-image url('/images/front-page/cidery-img-01.jpg')
     +pc()
       height 771px
-      background-image url('/images/front-page/cidery-img-01-pc.jpg')
+      // background-image url('/images/front-page/cidery-img-01-pc.jpg')
     +sp()
       height rem(821)
-      background-image url('/images/front-page/cidery-img-01-sp.jpg')
+      // background-image url('/images/front-page/cidery-img-01-sp.jpg')
 
     .cidery__ttl__pic
       position absolute
