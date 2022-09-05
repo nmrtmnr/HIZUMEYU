@@ -43,7 +43,7 @@ export default {
       }
     },
     'info': {
-      'url': 'www.hizumeyu.jp',
+      'url': 'hizumeyu.jp',
       'copyright': 'hizumeyu co.,ltd'
     },
     'logo': {

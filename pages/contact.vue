@@ -363,7 +363,7 @@
       justify-content center
       fontPc(16, 16, 100, 400)
       fontSp(28, 28, 100, 400)
-      color $richBlack
+      color $black
       opacity .3
       pointer-events none
       background-color $white
